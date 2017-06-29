@@ -16,8 +16,16 @@ fileprivate class WKCookieProcessPool: WKProcessPool {
 
 open class WKCookieWebView: WKWebView {
     
+    // Must use this instead of navigationDelegate
     public weak var wkNavigationDelegate: WKNavigationDelegate?
-    public var onCookieStorageUpdateHandler: ((WKCookieWebView) -> Void)?
+    
+    // If necessary, use clousre instead of delegate
+    public var onDecidePolicyForNavigationAction: ((WKWebView, WKNavigationAction, @escaping (WKNavigationActionPolicy) -> Swift.Void) -> Void)?
+    public var onDecidePolicyForNavigationResponse: ((WKWebView, WKNavigationResponse, @escaping (WKNavigationResponsePolicy) -> Swift.Void) -> Void)?
+    public var onDidReceiveChallenge: ((WKWebView, URLAuthenticationChallenge, @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) -> Void)?
+    
+    // The closure where cookie information is called at update time
+    public var onUpdateCookieStorage: ((WKCookieWebView) -> Void)?
     
     fileprivate var updatedCookies = [String]()
     
@@ -63,65 +71,60 @@ open class WKCookieWebView: WKWebView {
     
     fileprivate func update(webView: WKWebView) {
         webView.evaluateJavaScript("document.cookie;") { [weak self] (result, error) in
-            guard let documentCookie = result as? String else {
+            guard let `self` = self,
+                  let documentCookie = result as? String else {
                 return
             }
             
-            DispatchQueue.global(qos: .background).async(execute: {
-                guard let `self` = self else {
-                    return
-                }
+            let cookieValues = documentCookie.components(separatedBy: "; ")
+            
+            for value in cookieValues {
+                let comps = value.components(separatedBy: "=")
+                if comps.count < 2 { continue }
                 
-                let cookieValues = documentCookie.components(separatedBy: "; ")
+                let localCookie = HTTPCookieStorage.shared.cookies?.filter { $0.name == comps[0] }.first
                 
-                for value in cookieValues {
-                    let comps = value.components(separatedBy: "=")
-                    if comps.count < 2 { continue }
-                    
-                    let localCookie = HTTPCookieStorage.shared.cookies?.filter { $0.name == comps[0] }.first
-                    
-                    if let localCookie = localCookie {
-                        if !comps[1].isEmpty && localCookie.value != comps[1] {
-                            // cookie value is different
-                            if self.updatedCookies.contains(localCookie.name) {
-                                webView.evaluateJavaScript("document.cookie='\(localCookie.name)=\(localCookie.value);domain=\(localCookie.domain);path=\(localCookie.path);'", completionHandler: nil)
-                            } else {
-                                // set cookie
-                                var properties: [HTTPCookiePropertyKey: Any] = [
-                                    .name: localCookie.name,
-                                    .value: comps[1],
-                                    .domain: localCookie.domain,
-                                    .path: "/"
-                                ]
-                                
-                                if let expireDate = localCookie.expiresDate {
-                                    properties[.expires] = expireDate
-                                }
-                                
-                                if let cookie = HTTPCookie(properties: properties) {
-                                    HTTPCookieStorage.shared.setCookie(cookie)
-                                    self.onCookieStorageUpdateHandler?(self)
-                                }
-                            }
-                        }
-                    } else {
-                        if let rootDomain = webView.url?.host, !comps[0].isEmpty && !comps[1].isEmpty {
-                            let properties: [HTTPCookiePropertyKey: Any] = [
-                                .name: comps[0],
+                if let localCookie = localCookie {
+                    if !comps[1].isEmpty && localCookie.value != comps[1] {
+                        // cookie value is different
+                        if self.updatedCookies.contains(localCookie.name) {
+                            webView.evaluateJavaScript("document.cookie='\(localCookie.name)=\(localCookie.value);domain=\(localCookie.domain);path=\(localCookie.path);'", completionHandler: nil)
+                        } else {
+                            // set cookie
+                            var properties: [HTTPCookiePropertyKey: Any] = [
+                                .name: localCookie.name,
                                 .value: comps[1],
-                                .domain: rootDomain,
-                                .path: "/",
+                                .domain: localCookie.domain,
+                                .path: "/"
                             ]
                             
+                            if let expireDate = localCookie.expiresDate {
+                                properties[.expires] = expireDate
+                            }
+                            
                             if let cookie = HTTPCookie(properties: properties) {
-                                // set cookie
                                 HTTPCookieStorage.shared.setCookie(cookie)
-                                self.onCookieStorageUpdateHandler?(self)
+                                self.onUpdateCookieStorage?(self)
                             }
                         }
                     }
+                } else {
+                    if let rootDomain = webView.url?.host, !comps[0].isEmpty && !comps[1].isEmpty {
+                        let properties: [HTTPCookiePropertyKey: Any] = [
+                            .name: comps[0],
+                            .value: comps[1],
+                            .domain: rootDomain,
+                            .path: "/",
+                            ]
+                        
+                        if let cookie = HTTPCookie(properties: properties) {
+                            // set cookie
+                            HTTPCookieStorage.shared.setCookie(cookie)
+                            self.onUpdateCookieStorage?(self)
+                        }
+                    }
                 }
-            })
+            }
         }
     }
     
@@ -131,7 +134,7 @@ open class WKCookieWebView: WKWebView {
             updatedCookies.append($0.name)
         }
         
-        onCookieStorageUpdateHandler?(self)
+        onUpdateCookieStorage?(self)
     }
 }
 
@@ -140,8 +143,8 @@ extension WKCookieWebView: WKNavigationDelegate {
     
     // MARK: - WKNavigationDelegate
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
-        if let function = wkNavigationDelegate?.webView?(_:decidePolicyFor:decisionHandler:) {
-            wkNavigationDelegate?.webView?(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+        if let handler = onDecidePolicyForNavigationAction {
+            handler(webView, navigationAction, decisionHandler)
         } else {
             decisionHandler(.allow)
         }
@@ -149,8 +152,11 @@ extension WKCookieWebView: WKNavigationDelegate {
 
     public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Swift.Void) {
         defer {
-            decisionHandler(.allow)
-            wkNavigationDelegate?.webView?(webView, decidePolicyFor: navigationResponse, decisionHandler: decisionHandler)
+            if let handler = onDecidePolicyForNavigationResponse {
+                handler(webView, navigationResponse, decisionHandler)
+            } else {
+                decisionHandler(.allow)
+            }
         }
         
         guard let response = navigationResponse.response as? HTTPURLResponse,
@@ -188,9 +194,24 @@ extension WKCookieWebView: WKNavigationDelegate {
     }
     
     public func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
-        wkNavigationDelegate?.webView?(webView, didReceive: challenge, completionHandler: completionHandler)
+        if let handler = onDidReceiveChallenge {
+            handler(webView, challenge, completionHandler)
+        } else {
+            var disposition: URLSession.AuthChallengeDisposition = .performDefaultHandling
+            var credential: URLCredential?
+            
+            if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+                if let serverTrust = challenge.protectionSpace.serverTrust {
+                    credential = URLCredential(trust: serverTrust)
+                    disposition = .useCredential
+                }
+            } else {
+                disposition = .cancelAuthenticationChallenge
+            }
+            
+            completionHandler(disposition, credential)
+        }
     }
-    
     
     @available(iOS 9.0, *)
     public func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {

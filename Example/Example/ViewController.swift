@@ -14,7 +14,7 @@ class ViewController: UIViewController {
 
     lazy var webView: WKCookieWebView = {
         let webView: WKCookieWebView = WKCookieWebView(frame: self.view.bounds)
-        webView.wkNavigationDelegate = self
+//        webView.wkNavigationDelegate = self
         return webView
     }()
     
@@ -27,7 +27,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        webView.onCookieStorageUpdateHandler = { [weak self] (webView) in
+        webView.onDecidePolicyForNavigationAction = { (webView, navigationAction, decisionHandler) in
+            decisionHandler(.allow)
+        }
+        
+        webView.onDecidePolicyForNavigationResponse = { (webView, navigationResponse, decisionHandler) in
+            print("allHeaderFields : \((navigationResponse.response as? HTTPURLResponse)?.allHeaderFields ?? [:])")
+            decisionHandler(.allow)
+        }
+        
+        webView.onUpdateCookieStorage = { [weak self] (webView) in
             self?.printCookie()
         }
         
@@ -59,9 +68,4 @@ class ViewController: UIViewController {
         }
         print("=================================================")
     }
-}
-
-
-extension ViewController: WKNavigationDelegate {
-    
 }
