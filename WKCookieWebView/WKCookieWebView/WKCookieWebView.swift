@@ -32,10 +32,10 @@ open class WKCookieWebView: WKWebView {
     public init(frame: CGRect, configurationBlock: ((WKWebViewConfiguration) -> Void)? = nil) {
         HTTPCookieStorage.shared.cookieAcceptPolicy = .always
         let configuration = WKWebViewConfiguration()
-        super.init(frame: frame, configuration: configuration)
         configuration.processPool = WKCookieProcessPool.pool
-        configuration.userContentController = userContentWithCookies()
         configurationBlock?(configuration)
+        super.init(frame: frame, configuration: configuration)
+        configuration.userContentController = userContentWithCookies()
         navigationDelegate = self
     }
     
