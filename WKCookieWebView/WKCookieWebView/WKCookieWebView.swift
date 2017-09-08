@@ -45,7 +45,7 @@ open class WKCookieWebView: WKWebView {
     
     // MARK: - Private
     private func userContentWithCookies() -> WKUserContentController {
-        let userContentController = WKUserContentController()
+        let userContentController = configuration.userContentController
         
         if let cookies = HTTPCookieStorage.shared.cookies {
             let now = Date()
