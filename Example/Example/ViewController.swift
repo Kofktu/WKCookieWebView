@@ -14,25 +14,21 @@ class ViewController: UIViewController {
 
     lazy var webView: WKCookieWebView = {
         let webView: WKCookieWebView = WKCookieWebView(frame: self.view.bounds)
+        webView.translatesAutoresizingMaskIntoConstraints = false
 //        webView.wkNavigationDelegate = self
         return webView
     }()
-    
-    override func loadView() {
-        super.loadView()
-        setupWebView()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        setupWebView()
         webView.onDecidePolicyForNavigationAction = { (webView, navigationAction, decisionHandler) in
             decisionHandler(.allow)
         }
         
         webView.onDecidePolicyForNavigationResponse = { (webView, navigationResponse, decisionHandler) in
-            print("allHeaderFields : \((navigationResponse.response as? HTTPURLResponse)?.allHeaderFields ?? [:])")
             decisionHandler(.allow)
         }
         
