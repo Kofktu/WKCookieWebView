@@ -50,20 +50,27 @@ open class WKCookieWebView: WKWebView {
         
         if let cookies = HTTPCookieStorage.shared.cookies {
             let now = Date()
-            var cookieString = "var cookieNames = document.cookie.split('; ').map(function(cookie) { return cookie.split('=')[0] } );\n"
+            var stringValues: [String] = []
+            stringValues.append("var cookieNames = document.cookie.split('; ').map(function(cookie) { return cookie.split('=')[0] } );")
             
             for cookie in cookies {
                 if let expiresDate = cookie.expiresDate, now.compare(expiresDate) == .orderedDescending {
                     // Expire
-                    HTTPCookieStorage.shared.deleteCookie(cookie)
+                    delete(cookie: cookie)
                     continue
                 }
                 
-                cookieString += "if (cookieNames.indexOf('\(cookie.name)') == -1) { document.cookie='\(cookie.name)=\(cookie.value);domain=\(cookie.domain);path=\(cookie.path);'; };\n"
+                stringValues.append("if (cookieNames.indexOf('\(cookie.name)') == -1) { document.cookie='\(cookie.name)=\(cookie.value);domain=\(cookie.domain);path=\(cookie.path);'; };")
                 updatedCookies.append(cookie.name)
+                
+                if #available(iOS 11.0, *) {
+                    WKWebsiteDataStore.default().httpCookieStore.setCookie(cookie, completionHandler: nil)
+                }
             }
             
-            userContentController.addUserScript(WKUserScript(source: cookieString, injectionTime: .atDocumentStart, forMainFrameOnly: false))
+            userContentController.addUserScript(WKUserScript(source: stringValues.joined(separator: "\n"),
+                                                             injectionTime: .atDocumentStart,
+                                                             forMainFrameOnly: false))
         }
         
         return userContentController
@@ -102,7 +109,7 @@ open class WKCookieWebView: WKWebView {
                     var properties: [HTTPCookiePropertyKey: Any] = localCookie.properties ?? [
                         .name: localCookie.name,
                         .domain: localCookie.domain,
-                        .path: localCookie.path,
+                        .path: localCookie.path
                     ]
                     
                     properties[.value] = cookieValue
@@ -120,7 +127,7 @@ open class WKCookieWebView: WKWebView {
                         .name: cookieName,
                         .value: cookieValue,
                         .domain: host,
-                        .path: "/",
+                        .path: "/"
                     ]
                     
                     if let cookie = HTTPCookie(properties: properties) {
@@ -142,8 +149,12 @@ open class WKCookieWebView: WKWebView {
     private func update(cookies: [HTTPCookie]?) {
         cookies?.forEach {
             set(cookie: $0)
-            updatedCookies.append($0.name)
+            
+            if !updatedCookies.contains($0.name) {
+                updatedCookies.append($0.name)
+            }
         }
+        
         onUpdateCookieStorage?(self)
     }
     
@@ -163,7 +174,7 @@ public extension WKCookieWebView {
     
     public func fetchCookies(fileter host: String, completion: @escaping HTTPCookieHandler) {
         fetchCookies { (cookies) in
-            completion(cookies?.filter { $0.domain.range(of: host) != nil })
+            completion(cookies?.filter { host.range(of: $0.domain) != nil })
         }
     }
     
