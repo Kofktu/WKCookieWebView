@@ -14,18 +14,40 @@
 		C337D6991EFE2E1F00425943 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C337D6971EFE2E1F00425943 /* LaunchScreen.storyboard */; };
 		C337D6B01EFE36D800425943 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C337D6AF1EFE36D800425943 /* Foundation.framework */; };
 		C337D6B21EFE36DD00425943 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C337D6B11EFE36DD00425943 /* UIKit.framework */; };
-		C3BD31BA1EFE4B4F007DCD21 /* WKCookieWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C395B7031EFE49FA008F513C /* WKCookieWebView.framework */; };
+		C3DDE17D2164BFE200A79981 /* WKCookieWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3DDE17C2164BFA500A79981 /* WKCookieWebView.framework */; };
+		C3DDE17E2164BFE200A79981 /* WKCookieWebView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3DDE17C2164BFA500A79981 /* WKCookieWebView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C395B7021EFE49FA008F513C /* PBXContainerItemProxy */ = {
+		C3DDE17B2164BFA500A79981 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C395B6FE1EFE49FA008F513C /* WKCookieWebView.xcodeproj */;
+			containerPortal = C3DDE1772164BFA500A79981 /* WKCookieWebView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C337D6771EFE2CFF00425943;
 			remoteInfo = WKCookieWebView;
 		};
+		C3DDE17F2164BFE200A79981 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C3DDE1772164BFA500A79981 /* WKCookieWebView.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C337D6761EFE2CFF00425943;
+			remoteInfo = WKCookieWebView;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C3DDE1812164BFE200A79981 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C3DDE17E2164BFE200A79981 /* WKCookieWebView.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C337D68B1EFE2E1F00425943 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,7 +59,7 @@
 		C337D69A1EFE2E1F00425943 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C337D6AF1EFE36D800425943 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C337D6B11EFE36DD00425943 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		C395B6FE1EFE49FA008F513C /* WKCookieWebView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKCookieWebView.xcodeproj; path = ../WKCookieWebView/WKCookieWebView.xcodeproj; sourceTree = "<group>"; };
+		C3DDE1772164BFA500A79981 /* WKCookieWebView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKCookieWebView.xcodeproj; path = ../WKCookieWebView.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,9 +67,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3BD31BA1EFE4B4F007DCD21 /* WKCookieWebView.framework in Frameworks */,
 				C337D6B21EFE36DD00425943 /* UIKit.framework in Frameworks */,
 				C337D6B01EFE36D800425943 /* Foundation.framework in Frameworks */,
+				C3DDE17D2164BFE200A79981 /* WKCookieWebView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,7 +79,7 @@
 		C337D6821EFE2E1F00425943 = {
 			isa = PBXGroup;
 			children = (
-				C395B6FE1EFE49FA008F513C /* WKCookieWebView.xcodeproj */,
+				C3DDE1772164BFA500A79981 /* WKCookieWebView.xcodeproj */,
 				C337D68D1EFE2E1F00425943 /* Example */,
 				C337D68C1EFE2E1F00425943 /* Products */,
 				C337D6AE1EFE36D800425943 /* Frameworks */,
@@ -94,10 +116,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C395B6FF1EFE49FA008F513C /* Products */ = {
+		C3DDE1782164BFA500A79981 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C395B7031EFE49FA008F513C /* WKCookieWebView.framework */,
+				C3DDE17C2164BFA500A79981 /* WKCookieWebView.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,10 +134,12 @@
 				C337D6871EFE2E1F00425943 /* Sources */,
 				C337D6881EFE2E1F00425943 /* Frameworks */,
 				C337D6891EFE2E1F00425943 /* Resources */,
+				C3DDE1812164BFE200A79981 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C3DDE1802164BFE200A79981 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -134,6 +158,7 @@
 				TargetAttributes = {
 					C337D68A1EFE2E1F00425943 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = KLVLNTBFM4;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -151,8 +176,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = C395B6FF1EFE49FA008F513C /* Products */;
-					ProjectRef = C395B6FE1EFE49FA008F513C /* WKCookieWebView.xcodeproj */;
+					ProductGroup = C3DDE1782164BFA500A79981 /* Products */;
+					ProjectRef = C3DDE1772164BFA500A79981 /* WKCookieWebView.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -163,11 +188,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		C395B7031EFE49FA008F513C /* WKCookieWebView.framework */ = {
+		C3DDE17C2164BFA500A79981 /* WKCookieWebView.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = WKCookieWebView.framework;
-			remoteRef = C395B7021EFE49FA008F513C /* PBXContainerItemProxy */;
+			remoteRef = C3DDE17B2164BFA500A79981 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -196,6 +221,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C3DDE1802164BFE200A79981 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKCookieWebView;
+			targetProxy = C3DDE17F2164BFE200A79981 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C337D6921EFE2E1F00425943 /* Main.storyboard */ = {
@@ -313,7 +346,9 @@
 		C337D69E1EFE2E1F00425943 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KLVLNTBFM4;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kofktu.Example;
@@ -325,7 +360,9 @@
 		C337D69F1EFE2E1F00425943 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KLVLNTBFM4;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kofktu.Example;
