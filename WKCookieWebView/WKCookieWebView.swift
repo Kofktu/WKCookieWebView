@@ -93,7 +93,6 @@ open class WKCookieWebView: WKWebView {
     
     private func update(with cachedCookies: [HTTPCookie]?, documentCookie: String, host: String) {
         let cookieValues = documentCookie.components(separatedBy: "; ")
-        var cachedCookies: [HTTPCookie]? = cachedCookies
         
         for value in cookieValues {
             var comps = value.components(separatedBy: "=")
@@ -114,12 +113,12 @@ open class WKCookieWebView: WKWebView {
                     
                     properties[.value] = cookieValue
                     
+                    self.delete(cookie: localCookie)
+                    
                     if let cookie = HTTPCookie(properties: properties) {
                         self.set(cookie: cookie)
                         self.onUpdateCookieStorage?(self)
                     }
-                } else if let index = cachedCookies?.index(of: localCookie) {
-                    cachedCookies?.remove(at: index)
                 }
             } else {
                 if !cookieName.isEmpty && !cookieValue.isEmpty {
@@ -137,12 +136,6 @@ open class WKCookieWebView: WKWebView {
                     }
                 }
             }
-        }
-        
-        // Delete cookies with the same name
-        cachedCookies?.forEach {
-            self.delete(cookie: $0)
-            self.onUpdateCookieStorage?(self)
         }
     }
     
