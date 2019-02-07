@@ -1,0 +1,16 @@
+PODS:
+  - WKCookieWebView (1.1.1)
+
+DEPENDENCIES:
+  - WKCookieWebView (from `../`)
+
+EXTERNAL SOURCES:
+  WKCookieWebView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  WKCookieWebView: bd83132219b942b35b175cfba83d2a8f68330a26
+
+PODFILE CHECKSUM: ba9274dcc56f1b604eac25e9bbe3dae4b04165f4
+
+COCOAPODS: 1.5.3
