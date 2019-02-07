@@ -17,19 +17,19 @@ fileprivate class WKCookieProcessPool: WKProcessPool {
 open class WKCookieWebView: WKWebView {
     
     // Must use this instead of navigationDelegate
-    public weak var wkNavigationDelegate: WKNavigationDelegate?
+    @objc public weak var wkNavigationDelegate: WKNavigationDelegate?
     
     // If necessary, use clousre instead of delegate
-    public var onDecidePolicyForNavigationAction: ((WKWebView, WKNavigationAction, @escaping (WKNavigationActionPolicy) -> Swift.Void) -> Void)?
-    public var onDecidePolicyForNavigationResponse: ((WKWebView, WKNavigationResponse, @escaping (WKNavigationResponsePolicy) -> Swift.Void) -> Void)?
-    public var onDidReceiveChallenge: ((WKWebView, URLAuthenticationChallenge, @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) -> Void)?
+    @objc public var onDecidePolicyForNavigationAction: ((WKWebView, WKNavigationAction, @escaping (WKNavigationActionPolicy) -> Swift.Void) -> Void)?
+    @objc public var onDecidePolicyForNavigationResponse: ((WKWebView, WKNavigationResponse, @escaping (WKNavigationResponsePolicy) -> Swift.Void) -> Void)?
+    @objc public var onDidReceiveChallenge: ((WKWebView, URLAuthenticationChallenge, @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) -> Void)?
     
     // The closure where cookie information is called at update time
-    public var onUpdateCookieStorage: ((WKCookieWebView) -> Void)?
+    @objc public var onUpdateCookieStorage: ((WKCookieWebView) -> Void)?
     
     private var updatedCookies = [String]()
     
-    
+    @objc
     public init(frame: CGRect, configurationBlock: ((WKWebViewConfiguration) -> Void)? = nil) {
         HTTPCookieStorage.shared.cookieAcceptPolicy = .always
         let configuration = WKWebViewConfiguration()

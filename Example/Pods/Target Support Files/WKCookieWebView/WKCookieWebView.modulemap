@@ -1,0 +1,6 @@
+framework module WKCookieWebView {
+  umbrella header "WKCookieWebView-umbrella.h"
+
+  export *
+  module * { export * }
+}
