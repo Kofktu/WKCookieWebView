@@ -50,8 +50,6 @@ open class WKCookieWebView: WKWebView {
         
         if let cookies = HTTPCookieStorage.shared.cookies {
             let now = Date()
-            var stringValues: [String] = []
-            stringValues.append("var cookieNames = document.cookie.split('; ').map(function(cookie) { return cookie.split('=')[0] } );")
             
             for cookie in cookies {
                 if let expiresDate = cookie.expiresDate, now.compare(expiresDate) == .orderedDescending {
@@ -60,17 +58,16 @@ open class WKCookieWebView: WKWebView {
                     continue
                 }
                 
-                stringValues.append("if (cookieNames.indexOf('\(cookie.name)') == -1) { document.cookie='\(cookie.name)=\(cookie.value);domain=\(cookie.domain);path=\(cookie.path);'; };")
+                let value = "document.cookie='\(cookie.name)=\(cookie.value);domain=\(cookie.domain);path=\(cookie.path);';"
+                userContentController.addUserScript(WKUserScript(source: value,
+                                                                 injectionTime: .atDocumentStart,
+                                                                 forMainFrameOnly: false))
                 updatedCookies.append(cookie.name)
                 
                 if #available(iOS 11.0, *) {
                     WKWebsiteDataStore.default().httpCookieStore.setCookie(cookie, completionHandler: nil)
                 }
             }
-            
-            userContentController.addUserScript(WKUserScript(source: stringValues.joined(separator: "\n"),
-                                                             injectionTime: .atDocumentStart,
-                                                             forMainFrameOnly: false))
         }
         
         return userContentController

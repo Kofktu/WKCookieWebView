@@ -23,20 +23,22 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        setupWebView()
-        webView.onDecidePolicyForNavigationAction = { (webView, navigationAction, decisionHandler) in
-            decisionHandler(.allow)
-        }
+        let urlString = "http://github.com"
+        let isNeedPreloadForCookieSync = true
         
-        webView.onDecidePolicyForNavigationResponse = { (webView, navigationResponse, decisionHandler) in
-            decisionHandler(.allow)
+        if isNeedPreloadForCookieSync {
+            // After running the app, before the first webview was loaded,
+            // Cookies may not be set properly,
+            // In that case, use the loader in advance to synchronize.
+            // You can use the webview.
+            WKCookieWebView.preloadWithDomainForCookieSync(urlString: urlString) { [weak self] in
+                self?.setupWebView()
+                self?.webView.load(URLRequest(url: URL(string: urlString)!))
+            }
+        } else {
+            setupWebView()
+            webView.load(URLRequest(url: URL(string: urlString)!))
         }
-        
-        webView.onUpdateCookieStorage = { [weak self] (webView) in
-            self?.printCookie()
-        }
-        
-        webView.load(URLRequest(url: URL(string: "http://github.com")!))
     }
     
     // MARK: - Private
@@ -55,6 +57,18 @@ class ViewController: UIViewController {
             options: [],
             metrics: nil,
             views: views))
+        
+        webView.onDecidePolicyForNavigationAction = { (webView, navigationAction, decisionHandler) in
+            decisionHandler(.allow)
+        }
+        
+        webView.onDecidePolicyForNavigationResponse = { (webView, navigationResponse, decisionHandler) in
+            decisionHandler(.allow)
+        }
+        
+        webView.onUpdateCookieStorage = { [weak self] (webView) in
+            self?.printCookie()
+        }
     }
     
     private func printCookie() {
