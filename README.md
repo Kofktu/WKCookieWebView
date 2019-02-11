@@ -65,8 +65,8 @@ let webView = WKCookieWebView(frame: frame, configurationBlock: { (configuration
 ```
 
 #### Preloader
-After running the app, before the first webview was loaded,
-Cookies may not be set properly,
+After running the app, before the first webview was loaded,  
+Cookies may not be set properly,  
 In that case, use the loader in advance to synchronize.
 
 ```swift
