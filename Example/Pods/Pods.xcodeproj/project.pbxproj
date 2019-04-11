@@ -7,210 +7,208 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		23826C13AA695445BB20DF62511E661D /* WKCookieWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B2C76179E552666F1137568692E8A /* WKCookieWebView.swift */; };
-		284CC5458E8F1B6DF34850A2C4080E8F /* WKCookieWebView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A65DACABC8593835CE727AF9A90F0A8 /* WKCookieWebView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		541C057DEEE9EF84C95609D76336D29C /* Pods-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD65E35A3233FBE6F2EFDEB3D43D114 /* Pods-Example-dummy.m */; };
-		6969888A6213A20C67BF7EF4DB381E12 /* WKCookieWebView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B35BE9D2C6DF40DD2CF0FE3B3D3949 /* WKCookieWebView-dummy.m */; };
-		B13C5674C3D033D3BA52AF26A65358EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
-		B36A67000528C733390A7424A18F0F24 /* Pods-Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 15D3FE98E9F2D34863BD3F3597A0485A /* Pods-Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CEA017D9221137FD0008CC19 /* WKCookieWebViewPreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA017D8221137FD0008CC19 /* WKCookieWebViewPreloader.swift */; };
-		CEA968F497D2CD27ABA66657BE1C24E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
+		0960C85B83FDB9F06FDD9E2455C862C3 /* Pods-Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 96575DA5A33E3BA4F12184BFE42BAD90 /* Pods-Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6338118D4369898916E74D1266DA1EED /* Pods-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ACFBF7097B199449E8749F7EE01465 /* Pods-Example-dummy.m */; };
+		7806CE1B3D3BCB2DD80D3B1A3EEE8F6A /* WKCookieWebView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F9B8D06FC63CACFC7009B84EFBE9078 /* WKCookieWebView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9EF075A860AEA97D9FB1FCF8CB194CEF /* WKCookieWebViewPreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660A4838ECA422C9F31CA74CEAD6A1A /* WKCookieWebViewPreloader.swift */; };
+		B214DF1BB766D11009045B9556B1D6C8 /* WKCookieWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6347E05729CDDE494D0F26D373369F70 /* WKCookieWebView.swift */; };
+		D4B41CA616F5EDD5B8053831167A82CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
+		DEA14AEAAF6B55356B1B67E0E9F6B331 /* WKCookieWebView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E589899935AEEC399B40D294D057D326 /* WKCookieWebView-dummy.m */; };
+		E6F01327FD0B71BEA5892DCB8D16266F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D57C05B8B97AAF099289CD9F03AC813B /* PBXContainerItemProxy */ = {
+		B22E142646A43BBACF021DBE3CDABEEB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AB5E045D901749D54F8A4E9235E808AD;
+			remoteGlobalIDString = 5C8CFCF7BDB893EFF9C0F73798CBD9CC;
 			remoteInfo = WKCookieWebView;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00ADF20862C80EB73CF49B2F6937575C /* WKCookieWebView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKCookieWebView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		044AA3E23F71470C9B5F50D44720EA0D /* Pods-Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-resources.sh"; sourceTree = "<group>"; };
-		11434BC759D12F57876FBB74A4775E74 /* Pods-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		15D3FE98E9F2D34863BD3F3597A0485A /* Pods-Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Example-umbrella.h"; sourceTree = "<group>"; };
-		1A65DACABC8593835CE727AF9A90F0A8 /* WKCookieWebView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WKCookieWebView-umbrella.h"; sourceTree = "<group>"; };
-		1AD65E35A3233FBE6F2EFDEB3D43D114 /* Pods-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-dummy.m"; sourceTree = "<group>"; };
-		25A37D4D536CC5988A439441117C41F4 /* Pods-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Example.modulemap"; sourceTree = "<group>"; };
-		3ADE9E5655579DB0F79DC9C80758673C /* Pods-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		3F3EFEBDE6702DEFDFFF9D5C6DBC3773 /* Pods-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-frameworks.sh"; sourceTree = "<group>"; };
-		5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		5AA659484B2BEA438AEBBADFBF07A2E1 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B81C04F8E84EAE60AE15C8695031A5F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6473C67B5D6C6F312902BBBB181BC0F5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6551EF05CC8B2B1297D2E677C2241D16 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		89B35BE9D2C6DF40DD2CF0FE3B3D3949 /* WKCookieWebView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WKCookieWebView-dummy.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		97C2D52F4FAA328D9E87085888E9E56E /* WKCookieWebView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WKCookieWebView-prefix.pch"; sourceTree = "<group>"; };
-		A00C5F18E1FD27BA26055F71D57C587E /* WKCookieWebView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = WKCookieWebView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A79AC23D5A157FED70D9C53D844B2319 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
-		C50A7F2E55691C9A250532A9450094A3 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		CEA017D8221137FD0008CC19 /* WKCookieWebViewPreloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKCookieWebViewPreloader.swift; sourceTree = "<group>"; };
-		D5A3C16E3A384BDA30F2C218BDB069CD /* WKCookieWebView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WKCookieWebView.xcconfig; sourceTree = "<group>"; };
-		E02626AC18FA89AF180FDF98126E1C9F /* WKCookieWebView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = WKCookieWebView.modulemap; sourceTree = "<group>"; };
-		E92B2C76179E552666F1137568692E8A /* WKCookieWebView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WKCookieWebView.swift; path = WKCookieWebView/WKCookieWebView.swift; sourceTree = "<group>"; };
-		EFC5B2E05B58CD826FD55659BF1D7E39 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		0D7670157C7D120B0D5E584600E00029 /* Pods-Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-Info.plist"; sourceTree = "<group>"; };
+		13690F8BEA03FF5236FE44FDC7B6EAAD /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		19D1D549A499E58347163FE7AF879571 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Example.framework; path = "Pods-Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C162FC21D423A87FC143A0B632CFC08 /* Pods-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-frameworks.sh"; sourceTree = "<group>"; };
+		2F9B8D06FC63CACFC7009B84EFBE9078 /* WKCookieWebView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WKCookieWebView-umbrella.h"; sourceTree = "<group>"; };
+		35E2C288A180219D12F161F8F67849E8 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		38E2D0FC5B795552B0998ADC2C52D789 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		4068C6FC16B695F1B8A5611E77893DC9 /* WKCookieWebView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WKCookieWebView-prefix.pch"; sourceTree = "<group>"; };
+		415F61F11BD564043CA80AC49145E3C2 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
+		55D3ADE233900B5C67CEBDDED9DCECCC /* Pods-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		6347E05729CDDE494D0F26D373369F70 /* WKCookieWebView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WKCookieWebView.swift; path = WKCookieWebView/WKCookieWebView.swift; sourceTree = "<group>"; };
+		64CA1279428C6FFCCB314759C221C29B /* WKCookieWebView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = WKCookieWebView.modulemap; sourceTree = "<group>"; };
+		7660A4838ECA422C9F31CA74CEAD6A1A /* WKCookieWebViewPreloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WKCookieWebViewPreloader.swift; path = WKCookieWebView/WKCookieWebViewPreloader.swift; sourceTree = "<group>"; };
+		76ACFBF7097B199449E8749F7EE01465 /* Pods-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-dummy.m"; sourceTree = "<group>"; };
+		96575DA5A33E3BA4F12184BFE42BAD90 /* Pods-Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Example-umbrella.h"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		ADD0587B37B52C1E8ECBBA43CF7761CB /* Pods-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		BE3BA84255020A58AEAC14FA92B8B0E5 /* WKCookieWebView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "WKCookieWebView-Info.plist"; sourceTree = "<group>"; };
+		C533D235E73966E3ECB5124AC5A7B23B /* WKCookieWebView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = WKCookieWebView.framework; path = WKCookieWebView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C743D3A5AB93A727EA1A577CE93AF024 /* Pods-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Example.modulemap"; sourceTree = "<group>"; };
+		CABC444B46702E4B081E5AD1E39542B8 /* WKCookieWebView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WKCookieWebView.xcconfig; sourceTree = "<group>"; };
+		CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		CD3442EDB5A447FADE6DFB47F7E4D406 /* WKCookieWebView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = WKCookieWebView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E589899935AEEC399B40D294D057D326 /* WKCookieWebView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WKCookieWebView-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		50E5398E32C17F8C17BA241E9E0F2BF2 /* Frameworks */ = {
+		A03392EA0E0C3A574CD84CAEA7985110 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B13C5674C3D033D3BA52AF26A65358EE /* Foundation.framework in Frameworks */,
+				D4B41CA616F5EDD5B8053831167A82CF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D36C51CCA1328F163276E3B61BE34677 /* Frameworks */ = {
+		E2C4424F733384BA4F2987D37AC606E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEA968F497D2CD27ABA66657BE1C24E2 /* Foundation.framework in Frameworks */,
+				E6F01327FD0B71BEA5892DCB8D16266F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1B5ECB992A56AE0C70DC72D88BB90B05 /* Pods-Example */ = {
+		5B2E29C865B6B15F964BB82D3C915AB7 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5B81C04F8E84EAE60AE15C8695031A5F /* Info.plist */,
-				25A37D4D536CC5988A439441117C41F4 /* Pods-Example.modulemap */,
-				3ADE9E5655579DB0F79DC9C80758673C /* Pods-Example-acknowledgements.markdown */,
-				11434BC759D12F57876FBB74A4775E74 /* Pods-Example-acknowledgements.plist */,
-				1AD65E35A3233FBE6F2EFDEB3D43D114 /* Pods-Example-dummy.m */,
-				3F3EFEBDE6702DEFDFFF9D5C6DBC3773 /* Pods-Example-frameworks.sh */,
-				044AA3E23F71470C9B5F50D44720EA0D /* Pods-Example-resources.sh */,
-				15D3FE98E9F2D34863BD3F3597A0485A /* Pods-Example-umbrella.h */,
-				EFC5B2E05B58CD826FD55659BF1D7E39 /* Pods-Example.debug.xcconfig */,
-				A79AC23D5A157FED70D9C53D844B2319 /* Pods-Example.release.xcconfig */,
-			);
-			name = "Pods-Example";
-			path = "Target Support Files/Pods-Example";
-			sourceTree = "<group>";
-		};
-		4A2F659B9C7F312C70B5AA818B2616EC /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				523F29FEF998F957EA48DE1EE57F241E /* WKCookieWebView */,
+				DF0E06E1A562139F5AD6A6944BB014D1 /* WKCookieWebView */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		523F29FEF998F957EA48DE1EE57F241E /* WKCookieWebView */ = {
+		9B055D0CFEA43187E72B03DED11F5662 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				E92B2C76179E552666F1137568692E8A /* WKCookieWebView.swift */,
-				CEA017D8221137FD0008CC19 /* WKCookieWebViewPreloader.swift */,
-				F955107DDE10183098B945FE04B4D38D /* Pod */,
-				E33D082799C3138CCE3CF9B3CF44D06B /* Support Files */,
-			);
-			name = WKCookieWebView;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		5E0D919E635D23B70123790B8308F8EF /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */,
+				CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		6A4F6A14E3FB951290E4531728B7A461 /* Targets Support Files */ = {
+		BBDD15EA87B1F1294BC5D887D4DEB249 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1B5ECB992A56AE0C70DC72D88BB90B05 /* Pods-Example */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				4A2F659B9C7F312C70B5AA818B2616EC /* Development Pods */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				8E8AE60C53D6BCD87F30A176A8B0A4CF /* Products */,
-				6A4F6A14E3FB951290E4531728B7A461 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		8E8AE60C53D6BCD87F30A176A8B0A4CF /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5AA659484B2BEA438AEBBADFBF07A2E1 /* Pods_Example.framework */,
-				00ADF20862C80EB73CF49B2F6937575C /* WKCookieWebView.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5E0D919E635D23B70123790B8308F8EF /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E33D082799C3138CCE3CF9B3CF44D06B /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				6473C67B5D6C6F312902BBBB181BC0F5 /* Info.plist */,
-				E02626AC18FA89AF180FDF98126E1C9F /* WKCookieWebView.modulemap */,
-				D5A3C16E3A384BDA30F2C218BDB069CD /* WKCookieWebView.xcconfig */,
-				89B35BE9D2C6DF40DD2CF0FE3B3D3949 /* WKCookieWebView-dummy.m */,
-				97C2D52F4FAA328D9E87085888E9E56E /* WKCookieWebView-prefix.pch */,
-				1A65DACABC8593835CE727AF9A90F0A8 /* WKCookieWebView-umbrella.h */,
+				64CA1279428C6FFCCB314759C221C29B /* WKCookieWebView.modulemap */,
+				CABC444B46702E4B081E5AD1E39542B8 /* WKCookieWebView.xcconfig */,
+				E589899935AEEC399B40D294D057D326 /* WKCookieWebView-dummy.m */,
+				BE3BA84255020A58AEAC14FA92B8B0E5 /* WKCookieWebView-Info.plist */,
+				4068C6FC16B695F1B8A5611E77893DC9 /* WKCookieWebView-prefix.pch */,
+				2F9B8D06FC63CACFC7009B84EFBE9078 /* WKCookieWebView-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/WKCookieWebView";
 			sourceTree = "<group>";
 		};
-		F955107DDE10183098B945FE04B4D38D /* Pod */ = {
+		CE2E825F08D3AD0FD76E6D78D7512ED0 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				C50A7F2E55691C9A250532A9450094A3 /* LICENSE */,
-				6551EF05CC8B2B1297D2E677C2241D16 /* README.md */,
-				A00C5F18E1FD27BA26055F71D57C587E /* WKCookieWebView.podspec */,
+				F9A708936E99FD7F473C57BA21F7279D /* Pods-Example */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				5B2E29C865B6B15F964BB82D3C915AB7 /* Development Pods */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				F13EBB31F7DA582A97B55ECD4FBFFFE8 /* Products */,
+				CE2E825F08D3AD0FD76E6D78D7512ED0 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B055D0CFEA43187E72B03DED11F5662 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DF0E06E1A562139F5AD6A6944BB014D1 /* WKCookieWebView */ = {
+			isa = PBXGroup;
+			children = (
+				6347E05729CDDE494D0F26D373369F70 /* WKCookieWebView.swift */,
+				7660A4838ECA422C9F31CA74CEAD6A1A /* WKCookieWebViewPreloader.swift */,
+				E9AD24E660BB58B8BFCCFEA25F765003 /* Pod */,
+				BBDD15EA87B1F1294BC5D887D4DEB249 /* Support Files */,
+			);
+			name = WKCookieWebView;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		E9AD24E660BB58B8BFCCFEA25F765003 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				38E2D0FC5B795552B0998ADC2C52D789 /* LICENSE */,
+				13690F8BEA03FF5236FE44FDC7B6EAAD /* README.md */,
+				CD3442EDB5A447FADE6DFB47F7E4D406 /* WKCookieWebView.podspec */,
 			);
 			name = Pod;
+			sourceTree = "<group>";
+		};
+		F13EBB31F7DA582A97B55ECD4FBFFFE8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				19D1D549A499E58347163FE7AF879571 /* Pods_Example.framework */,
+				C533D235E73966E3ECB5124AC5A7B23B /* WKCookieWebView.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F9A708936E99FD7F473C57BA21F7279D /* Pods-Example */ = {
+			isa = PBXGroup;
+			children = (
+				C743D3A5AB93A727EA1A577CE93AF024 /* Pods-Example.modulemap */,
+				ADD0587B37B52C1E8ECBBA43CF7761CB /* Pods-Example-acknowledgements.markdown */,
+				55D3ADE233900B5C67CEBDDED9DCECCC /* Pods-Example-acknowledgements.plist */,
+				76ACFBF7097B199449E8749F7EE01465 /* Pods-Example-dummy.m */,
+				2C162FC21D423A87FC143A0B632CFC08 /* Pods-Example-frameworks.sh */,
+				0D7670157C7D120B0D5E584600E00029 /* Pods-Example-Info.plist */,
+				96575DA5A33E3BA4F12184BFE42BAD90 /* Pods-Example-umbrella.h */,
+				35E2C288A180219D12F161F8F67849E8 /* Pods-Example.debug.xcconfig */,
+				415F61F11BD564043CA80AC49145E3C2 /* Pods-Example.release.xcconfig */,
+			);
+			name = "Pods-Example";
+			path = "Target Support Files/Pods-Example";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		98B3FCF1A8DBA81D1EA6BEB1965004AD /* Headers */ = {
+		9F8F95E218B49DE515912E0D93EBAA73 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				284CC5458E8F1B6DF34850A2C4080E8F /* WKCookieWebView-umbrella.h in Headers */,
+				7806CE1B3D3BCB2DD80D3B1A3EEE8F6A /* WKCookieWebView-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ECD74FF1D0AA1429BA7A955D4D512200 /* Headers */ = {
+		E9CF130400B805BB7A49C1EAFC03F379 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B36A67000528C733390A7424A18F0F24 /* Pods-Example-umbrella.h in Headers */,
+				0960C85B83FDB9F06FDD9E2455C862C3 /* Pods-Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		AB5E045D901749D54F8A4E9235E808AD /* WKCookieWebView */ = {
+		5C8CFCF7BDB893EFF9C0F73798CBD9CC /* WKCookieWebView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4BA222EF6F3C4BF5F949948080C4F0E5 /* Build configuration list for PBXNativeTarget "WKCookieWebView" */;
+			buildConfigurationList = C8BD373C50186980DBBC7160ED9C8FAD /* Build configuration list for PBXNativeTarget "WKCookieWebView" */;
 			buildPhases = (
-				98B3FCF1A8DBA81D1EA6BEB1965004AD /* Headers */,
-				00F954E1F71CAB1D1838A12A6ECAF16E /* Sources */,
-				50E5398E32C17F8C17BA241E9E0F2BF2 /* Frameworks */,
-				1DFFAE8662E1BDDB31D7DD6B40CC9200 /* Resources */,
+				9F8F95E218B49DE515912E0D93EBAA73 /* Headers */,
+				9632A9B58A3E8E2ECA154D0EED1C8F92 /* Sources */,
+				E2C4424F733384BA4F2987D37AC606E3 /* Frameworks */,
+				F55A88BCC79CF89FFC58799EC5B35670 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -218,64 +216,64 @@
 			);
 			name = WKCookieWebView;
 			productName = WKCookieWebView;
-			productReference = 00ADF20862C80EB73CF49B2F6937575C /* WKCookieWebView.framework */;
+			productReference = C533D235E73966E3ECB5124AC5A7B23B /* WKCookieWebView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		BDC7D2A0425650467DD74FE9AB5CB14A /* Pods-Example */ = {
+		AB3281AB36BBA2D6A4B41F6C5C2770F9 /* Pods-Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5779564754A5F3C7B2BA6176379DB7AA /* Build configuration list for PBXNativeTarget "Pods-Example" */;
+			buildConfigurationList = C378C550854DF9110D111605F4EF017E /* Build configuration list for PBXNativeTarget "Pods-Example" */;
 			buildPhases = (
-				ECD74FF1D0AA1429BA7A955D4D512200 /* Headers */,
-				2D6C3768B99DE62705D2503A1F7916B9 /* Sources */,
-				D36C51CCA1328F163276E3B61BE34677 /* Frameworks */,
-				D66CE817438FABD8D3657D303B73BBEB /* Resources */,
+				E9CF130400B805BB7A49C1EAFC03F379 /* Headers */,
+				F7DF2F7BFBDD5DFB7E152668FB71E49E /* Sources */,
+				A03392EA0E0C3A574CD84CAEA7985110 /* Frameworks */,
+				B5C4C281F0AAE685F69185FB835482AE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8ABC71E8C06627577377746019D04D86 /* PBXTargetDependency */,
+				B466245F4D89D6CF05E6F03407648E2A /* PBXTargetDependency */,
 			);
 			name = "Pods-Example";
 			productName = "Pods-Example";
-			productReference = 5AA659484B2BEA438AEBBADFBF07A2E1 /* Pods_Example.framework */;
+			productReference = 19D1D549A499E58347163FE7AF879571 /* Pods_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 8E8AE60C53D6BCD87F30A176A8B0A4CF /* Products */;
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = F13EBB31F7DA582A97B55ECD4FBFFFE8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BDC7D2A0425650467DD74FE9AB5CB14A /* Pods-Example */,
-				AB5E045D901749D54F8A4E9235E808AD /* WKCookieWebView */,
+				AB3281AB36BBA2D6A4B41F6C5C2770F9 /* Pods-Example */,
+				5C8CFCF7BDB893EFF9C0F73798CBD9CC /* WKCookieWebView */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1DFFAE8662E1BDDB31D7DD6B40CC9200 /* Resources */ = {
+		B5C4C281F0AAE685F69185FB835482AE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D66CE817438FABD8D3657D303B73BBEB /* Resources */ = {
+		F55A88BCC79CF89FFC58799EC5B35670 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -285,39 +283,39 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		00F954E1F71CAB1D1838A12A6ECAF16E /* Sources */ = {
+		9632A9B58A3E8E2ECA154D0EED1C8F92 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6969888A6213A20C67BF7EF4DB381E12 /* WKCookieWebView-dummy.m in Sources */,
-				CEA017D9221137FD0008CC19 /* WKCookieWebViewPreloader.swift in Sources */,
-				23826C13AA695445BB20DF62511E661D /* WKCookieWebView.swift in Sources */,
+				DEA14AEAAF6B55356B1B67E0E9F6B331 /* WKCookieWebView-dummy.m in Sources */,
+				B214DF1BB766D11009045B9556B1D6C8 /* WKCookieWebView.swift in Sources */,
+				9EF075A860AEA97D9FB1FCF8CB194CEF /* WKCookieWebViewPreloader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2D6C3768B99DE62705D2503A1F7916B9 /* Sources */ = {
+		F7DF2F7BFBDD5DFB7E152668FB71E49E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				541C057DEEE9EF84C95609D76336D29C /* Pods-Example-dummy.m in Sources */,
+				6338118D4369898916E74D1266DA1EED /* Pods-Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8ABC71E8C06627577377746019D04D86 /* PBXTargetDependency */ = {
+		B466245F4D89D6CF05E6F03407648E2A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = WKCookieWebView;
-			target = AB5E045D901749D54F8A4E9235E808AD /* WKCookieWebView */;
-			targetProxy = D57C05B8B97AAF099289CD9F03AC813B /* PBXContainerItemProxy */;
+			target = 5C8CFCF7BDB893EFF9C0F73798CBD9CC /* WKCookieWebView */;
+			targetProxy = B22E142646A43BBACF021DBE3CDABEEB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1EA81F6EF63CC6EC8EBC2388EED7B7B2 /* Release */ = {
+		159B08C6EBCF6F3E0761A301E8D60517 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A79AC23D5A157FED70D9C53D844B2319 /* Pods-Example.release.xcconfig */;
+			baseConfigurationReference = 415F61F11BD564043CA80AC49145E3C2 /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -330,7 +328,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Example/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Example/Pods-Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -343,7 +341,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -351,72 +348,7 @@
 			};
 			name = Release;
 		};
-		230E625991CB00E5D461DD4636085410 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5A3C16E3A384BDA30F2C218BDB069CD /* WKCookieWebView.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/WKCookieWebView/WKCookieWebView-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/WKCookieWebView/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/WKCookieWebView/WKCookieWebView.modulemap";
-				PRODUCT_MODULE_NAME = WKCookieWebView;
-				PRODUCT_NAME = WKCookieWebView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		2466FD247A9CA83C43AC72942450C4D7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5A3C16E3A384BDA30F2C218BDB069CD /* WKCookieWebView.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/WKCookieWebView/WKCookieWebView-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/WKCookieWebView/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/WKCookieWebView/WKCookieWebView.modulemap";
-				PRODUCT_MODULE_NAME = WKCookieWebView;
-				PRODUCT_NAME = WKCookieWebView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		74A80190F6EE6099E873C9FF92732E78 /* Release */ = {
+		16FD0648F06E4A022961C9516E16703A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -448,8 +380,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -471,47 +401,14 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		80D144000B1795A46736262FC6534961 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFC5B2E05B58CD826FD55659BF1D7E39 /* Pods-Example.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Example/Pods-Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		E22CAAD1A64A2DF3D0511DBBD4F989AB /* Debug */ = {
+		2DB13D3FAE987D20610ACD677A28C6E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -543,8 +440,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -571,41 +466,140 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		5E01923BC12B360A93811611B3FCCBB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35E2C288A180219D12F161F8F67849E8 /* Pods-Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Example/Pods-Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Example/Pods-Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6448DAB02D9F9BA41BD264FBAE2A9290 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CABC444B46702E4B081E5AD1E39542B8 /* WKCookieWebView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/WKCookieWebView/WKCookieWebView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WKCookieWebView/WKCookieWebView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WKCookieWebView/WKCookieWebView.modulemap";
+				PRODUCT_MODULE_NAME = WKCookieWebView;
+				PRODUCT_NAME = WKCookieWebView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F9703CA76482E424E720C4AF704D054E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CABC444B46702E4B081E5AD1E39542B8 /* WKCookieWebView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/WKCookieWebView/WKCookieWebView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WKCookieWebView/WKCookieWebView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/WKCookieWebView/WKCookieWebView.modulemap";
+				PRODUCT_MODULE_NAME = WKCookieWebView;
+				PRODUCT_NAME = WKCookieWebView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E22CAAD1A64A2DF3D0511DBBD4F989AB /* Debug */,
-				74A80190F6EE6099E873C9FF92732E78 /* Release */,
+				2DB13D3FAE987D20610ACD677A28C6E8 /* Debug */,
+				16FD0648F06E4A022961C9516E16703A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4BA222EF6F3C4BF5F949948080C4F0E5 /* Build configuration list for PBXNativeTarget "WKCookieWebView" */ = {
+		C378C550854DF9110D111605F4EF017E /* Build configuration list for PBXNativeTarget "Pods-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2466FD247A9CA83C43AC72942450C4D7 /* Debug */,
-				230E625991CB00E5D461DD4636085410 /* Release */,
+				5E01923BC12B360A93811611B3FCCBB3 /* Debug */,
+				159B08C6EBCF6F3E0761A301E8D60517 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5779564754A5F3C7B2BA6176379DB7AA /* Build configuration list for PBXNativeTarget "Pods-Example" */ = {
+		C8BD373C50186980DBBC7160ED9C8FAD /* Build configuration list for PBXNativeTarget "WKCookieWebView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				80D144000B1795A46736262FC6534961 /* Debug */,
-				1EA81F6EF63CC6EC8EBC2388EED7B7B2 /* Release */,
+				F9703CA76482E424E720C4AF704D054E /* Debug */,
+				6448DAB02D9F9BA41BD264FBAE2A9290 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }

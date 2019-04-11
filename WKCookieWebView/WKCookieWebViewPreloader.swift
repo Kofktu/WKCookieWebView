@@ -38,7 +38,7 @@ public extension WKCookieWebView {
     }
     
     @objc
-    public class func preloadWithDomainForCookieSync(urlString: String,
+    class func preloadWithDomainForCookieSync(urlString: String,
                                                      completion: (() -> Void)? = nil) {
         guard let url = URL(string: urlString),
             let window = UIApplication.shared.keyWindow else {

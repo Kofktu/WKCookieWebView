@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     lazy var webView: WKCookieWebView = {
         let webView: WKCookieWebView = WKCookieWebView(frame: self.view.bounds)
         webView.translatesAutoresizingMaskIntoConstraints = false
-//        webView.wkNavigationDelegate = self
+        webView.wkNavigationDelegate = self
         return webView
     }()
     
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         let urlString = "http://github.com"
-        let isNeedPreloadForCookieSync = true
+        let isNeedPreloadForCookieSync = false
         
         if isNeedPreloadForCookieSync {
             // After running the app, before the first webview was loaded,
@@ -78,4 +78,16 @@ class ViewController: UIViewController {
         }
         print("=================================================")
     }
+}
+
+extension ViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("didFail.error : \(error)")
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("didFailProvisionalNavigation.error : \(error)")
+    }
+    
 }

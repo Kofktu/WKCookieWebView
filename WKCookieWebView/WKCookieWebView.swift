@@ -150,11 +150,11 @@ open class WKCookieWebView: WKWebView {
     
 }
 
-public extension WKCookieWebView {
+extension WKCookieWebView {
     
     typealias HTTPCookieHandler = ([HTTPCookie]?) -> Void
     
-    public func fetchCookies(completion: @escaping HTTPCookieHandler) {
+    func fetchCookies(completion: @escaping HTTPCookieHandler) {
         if #available(iOS 11.0, *) {
             WKWebsiteDataStore.default().httpCookieStore.getAllCookies(completion)
         } else {
@@ -162,7 +162,7 @@ public extension WKCookieWebView {
         }
     }
     
-    public func fetchCookies(fileter host: String, completion: @escaping HTTPCookieHandler) {
+    func fetchCookies(fileter host: String, completion: @escaping HTTPCookieHandler) {
         fetchCookies { (cookies) in
             completion(cookies?.filter { host.range(of: $0.domain) != nil })
         }
