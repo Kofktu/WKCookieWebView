@@ -5,7 +5,8 @@
 ## Requirements
 - iOS 8.0+
 - XCode 9.0+
-- Swift 4
+- Swift 5
+- Swift 4 ([1.1.3](https://github.com/Kofktu/WKCookieWebView/tree/1.1.3))
 - Swift 3 ([0.0.3](https://github.com/Kofktu/WKCookieWebView/tree/0.0.3))
 
 ## Installation
@@ -15,7 +16,7 @@ WKCookieWebView is available through [CocoaPods](http://cocoapods.org). To insta
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'WKCookieWebView'
+pod 'WKCookieWebView', '~> 2.0'
 ```
 
 #### Carthage
@@ -65,8 +66,8 @@ let webView = WKCookieWebView(frame: frame, configurationBlock: { (configuration
 ```
 
 #### Preloader
-After running the app, before the first webview was loaded,
-Cookies may not be set properly,
+After running the app, before the first webview was loaded,  
+Cookies may not be set properly,  
 In that case, use the loader in advance to synchronize.
 
 ```swift
