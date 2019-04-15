@@ -63,10 +63,6 @@ open class WKCookieWebView: WKWebView {
                                                                  injectionTime: .atDocumentStart,
                                                                  forMainFrameOnly: false))
                 updatedCookies.append(cookie.name)
-                
-                if #available(iOS 11.0, *) {
-                    WKWebsiteDataStore.default().httpCookieStore.setCookie(cookie, completionHandler: nil)
-                }
             }
         }
         
@@ -156,7 +152,9 @@ public extension WKCookieWebView {
     
     public func fetchCookies(completion: @escaping HTTPCookieHandler) {
         if #available(iOS 11.0, *) {
-            WKWebsiteDataStore.default().httpCookieStore.getAllCookies(completion)
+            configuration.websiteDataStore.httpCookieStore.getAllCookies { (cookies) in
+                completion(cookies)
+            }
         } else {
             completion(HTTPCookieStorage.shared.cookies)
         }
@@ -172,7 +170,7 @@ public extension WKCookieWebView {
         HTTPCookieStorage.shared.setCookie(cookie)
         
         if #available(iOS 11.0, *) {
-            WKWebsiteDataStore.default().httpCookieStore.setCookie(cookie, completionHandler: nil)
+            configuration.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: nil)
         }
     }
     
@@ -180,7 +178,7 @@ public extension WKCookieWebView {
         HTTPCookieStorage.shared.deleteCookie(cookie)
         
         if #available(iOS 11.0, *) {
-            WKWebsiteDataStore.default().httpCookieStore.delete(cookie, completionHandler: nil)
+            configuration.websiteDataStore.httpCookieStore.delete(cookie, completionHandler: nil)
         }
     }
     
