@@ -90,6 +90,12 @@ open class WKCookieWebView: WKWebView {
     private func update(with cachedCookies: [HTTPCookie]?, documentCookie: String, host: String) {
         let cookieValues = documentCookie.components(separatedBy: "; ")
         
+        guard cookieValues.isEmpty == false else {
+            return
+        }
+        
+        let dispatchGroup = DispatchGroup()
+        
         for value in cookieValues {
             var comps = value.components(separatedBy: "=")
             if comps.count < 2 { continue }
@@ -112,8 +118,11 @@ open class WKCookieWebView: WKWebView {
                     self.delete(cookie: localCookie)
                     
                     if let cookie = HTTPCookie(properties: properties) {
-                        self.set(cookie: cookie)
-                        self.onUpdateCookieStorage?(self)
+                        // set cookie
+                        dispatchGroup.enter()
+                        self.set(cookie: cookie) {
+                            dispatchGroup.leave()
+                        }
                     }
                 }
             } else {
@@ -127,24 +136,62 @@ open class WKCookieWebView: WKWebView {
                     
                     if let cookie = HTTPCookie(properties: properties) {
                         // set cookie
-                        self.set(cookie: cookie)
-                        self.onUpdateCookieStorage?(self)
+                        dispatchGroup.enter()
+                        self.set(cookie: cookie) {
+                            dispatchGroup.leave()
+                        }
                     }
                 }
             }
         }
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.updateWKCookieToHTTPCookieStorage(cachedCookies)
+            
+            guard let self = self else {
+                return
+            }
+            
+            self.onUpdateCookieStorage?(self)
+        }
     }
     
     private func update(cookies: [HTTPCookie]?) {
-        cookies?.forEach {
-            set(cookie: $0)
-            
+        guard let cookies = cookies, cookies.isEmpty == false else {
+            return
+        }
+        
+        let dispatchGroup = DispatchGroup()
+        cookies.forEach {
             if !updatedCookies.contains($0.name) {
                 updatedCookies.append($0.name)
             }
+            
+            dispatchGroup.enter()
+            set(cookie: $0) {
+                dispatchGroup.leave()
+            }
         }
         
-        onUpdateCookieStorage?(self)
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.onUpdateCookieStorage?(self)
+        }
+    }
+    
+    private func updateWKCookieToHTTPCookieStorage(_ wkCookies: [HTTPCookie]?) {
+        guard let cookies = HTTPCookieStorage.shared.cookies, #available(iOS 11.0, *) else {
+            return
+        }
+        
+        wkCookies?
+            .filter { cookies.contains($0) == false }
+            .forEach {
+                HTTPCookieStorage.shared.setCookie($0)
+        }
     }
     
 }
@@ -165,23 +212,27 @@ extension WKCookieWebView {
     
     func fetchCookies(fileter host: String, completion: @escaping HTTPCookieHandler) {
         fetchCookies { (cookies) in
-            completion(cookies?.filter { host.range(of: $0.domain) != nil })
+            completion(cookies?.filter { host.range(of: $0.domain) != nil || $0.domain.range(of: host) != nil })
         }
     }
     
-    func set(cookie: HTTPCookie) {
+    func set(cookie: HTTPCookie, completion: (() -> Void)? = nil) {
         HTTPCookieStorage.shared.setCookie(cookie)
         
         if #available(iOS 11.0, *) {
-            configuration.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: nil)
+            configuration.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: completion)
+        } else {
+            completion?()
         }
     }
     
-    func delete(cookie: HTTPCookie) {
+    func delete(cookie: HTTPCookie, completion: (() -> Void)? = nil) {
         HTTPCookieStorage.shared.deleteCookie(cookie)
         
         if #available(iOS 11.0, *) {
-            configuration.websiteDataStore.httpCookieStore.delete(cookie, completionHandler: nil)
+            configuration.websiteDataStore.httpCookieStore.delete(cookie, completionHandler: completion)
+        } else {
+            completion?()
         }
     }
     
@@ -270,6 +321,20 @@ extension WKCookieWebView: WKNavigationDelegate {
 }
 
 // MARK: - HTTPCookie
+extension HTTPCookie {
+    
+    open override func isEqual(_ object: Any?) -> Bool {
+        guard let other = object as? HTTPCookie else {
+            return false
+        }
+        
+        return name == other.name &&
+               value == other.value &&
+               domain == other.domain &&
+               path == other.path
+    }
+    
+}
 
 private extension HTTPCookie {
         

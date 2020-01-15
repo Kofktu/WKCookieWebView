@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let urlString = "http://github.com"
+        let urlString = "https://m.cafe.naver.com/golmarket"//http://github.com"
         let isNeedPreloadForCookieSync = false
         
         if isNeedPreloadForCookieSync {
@@ -39,6 +39,8 @@ class ViewController: UIViewController {
             setupWebView()
             webView.load(URLRequest(url: URL(string: urlString)!))
         }
+        
+//        perform(#selector(printCookie), with: nil, afterDelay: 1.0)
     }
     
     // MARK: - Private
@@ -71,12 +73,14 @@ class ViewController: UIViewController {
         }
     }
     
-    private func printCookie() {
+    @objc private func printCookie() {
         print("=====================Cookies=====================")
         HTTPCookieStorage.shared.cookies?.forEach {
             print($0)
         }
         print("=================================================")
+        
+//        perform(#selector(printCookie), with: nil, afterDelay: 1.0)
     }
 }
 
