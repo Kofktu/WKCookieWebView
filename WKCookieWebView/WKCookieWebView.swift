@@ -48,9 +48,12 @@ open class WKCookieWebView: WKWebView {
     private func userContentWithCookies() -> WKUserContentController {
         let userContentController = configuration.userContentController
         
-        if let cookies = HTTPCookieStorage.shared.cookies {
-            let now = Date()
+        if let cookies = HTTPCookieStorage.shared.cookies, cookies.count > 0 {
             
+            // https://stackoverflow.com/a/32845148
+            var scripts: [String] = ["var cookieNames = document.cookie.split('; ').map(function(cookie) { return cookie.split('=')[0] } )"]
+            let now = Date()
+
             for cookie in cookies {
                 if let expiresDate = cookie.expiresDate, now.compare(expiresDate) == .orderedDescending {
                     // Expire
@@ -58,18 +61,18 @@ open class WKCookieWebView: WKWebView {
                     continue
                 }
                 
-                let value = "document.cookie='\(cookie.name)=\(cookie.value);domain=\(cookie.domain);path=\(cookie.path);';"
-                userContentController.addUserScript(WKUserScript(source: value,
-                                                                 injectionTime: .atDocumentStart,
-                                                                 forMainFrameOnly: false))
-                updatedCookies.append(cookie.name)
+                scripts.append("if (cookieNames.indexOf('\(cookie.name)') == -1) { document.cookie='\(cookie.javaScriptString)'; }")
             }
+            
+            let mainScript = scripts.joined(separator: ";\n")
+            userContentController.addUserScript(WKUserScript(source: mainScript,
+                                                             injectionTime: .atDocumentStart,
+                                                             forMainFrameOnly: false))
         }
         
         return userContentController
-        
     }
-    
+
     private func update(webView: WKWebView) {
         // WKWebView -> HTTPCookieStorage
         webView.evaluateJavaScript("document.cookie;") { [weak self] (result, error) in
@@ -263,5 +266,37 @@ extension WKCookieWebView: WKNavigationDelegate {
     public func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         wkNavigationDelegate?.webViewWebContentProcessDidTerminate?(webView)
     }
+    
+}
+
+// MARK: - HTTPCookie
+
+private extension HTTPCookie {
+        
+    var javaScriptString: String {
+        var properties = [
+            "\(name)=\(value)",
+            "domain=\(domain)",
+            "path=\(path)"
+        ]
+        
+        if isSecure {
+            properties.append("secure=true")
+        }
+        
+        if let expiresDate = expiresDate {
+            properties.append("expires=\(HTTPCookie.dateFormatter.string(from: expiresDate))")
+        }
+        
+        return properties.joined(separator: "; ")
+    }
+    
+    private static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
+        return dateFormatter
+    }()
     
 }
