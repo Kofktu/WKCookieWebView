@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let urlString = "https://m.cafe.naver.com/golmarket"//http://github.com"
+        let urlString = "http://github.com"
         let isNeedPreloadForCookieSync = false
         
         if isNeedPreloadForCookieSync {
