@@ -39,8 +39,6 @@ class ViewController: UIViewController {
             setupWebView()
             webView.load(URLRequest(url: URL(string: urlString)!))
         }
-        
-//        perform(#selector(printCookie), with: nil, afterDelay: 1.0)
     }
     
     // MARK: - Private
@@ -59,14 +57,6 @@ class ViewController: UIViewController {
             options: [],
             metrics: nil,
             views: views))
-        
-        webView.onDecidePolicyForNavigationAction = { (webView, navigationAction, decisionHandler) in
-            decisionHandler(.allow)
-        }
-        
-        webView.onDecidePolicyForNavigationResponse = { (webView, navigationResponse, decisionHandler) in
-            decisionHandler(.allow)
-        }
         
         webView.onUpdateCookieStorage = { [weak self] (webView) in
             self?.printCookie()
@@ -87,6 +77,16 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        print("ViewController.decidePolicyFor.Action")
+        decisionHandler(.allow)
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        print("ViewController.decidePolicyFor.Response")
+        decisionHandler(.allow)
+    }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("didFail.error : \(error)")
