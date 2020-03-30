@@ -16,13 +16,19 @@ fileprivate final class WKCookieProcessPool: WKProcessPool {
 
 open class WKCookieWebView: WKWebView {
     
+    open override var navigationDelegate: WKNavigationDelegate? {
+        didSet {
+            guard navigationDelegate?.isEqual(self) == false else {
+                return
+            }
+            
+            wkNavigationDelegate = navigationDelegate
+            navigationDelegate = self
+        }
+    }
+    
     // Must use this instead of navigationDelegate
     @objc public weak var wkNavigationDelegate: WKNavigationDelegate?
-    
-    // If necessary, use clousre instead of delegate
-    @objc public var onDecidePolicyForNavigationAction: ((WKWebView, WKNavigationAction, @escaping (WKNavigationActionPolicy) -> Swift.Void) -> Void)?
-    @objc public var onDecidePolicyForNavigationResponse: ((WKWebView, WKNavigationResponse, @escaping (WKNavigationResponsePolicy) -> Swift.Void) -> Void)?
-    @objc public var onDidReceiveChallenge: ((WKWebView, URLAuthenticationChallenge, @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) -> Void)?
     
     // The closure where cookie information is called at update time
     @objc public var onUpdateCookieStorage: ((WKCookieWebView) -> Void)?
@@ -43,10 +49,12 @@ open class WKCookieWebView: WKWebView {
         fatalError("init(coder:) has not been implemented, init(frame:configurationBlock:)")
     }
     
+    @discardableResult
     open override func load(_ request: URLRequest) -> WKNavigation? {
         request.url.flatMap {
             configuration.userContentController = userContentWithCookies($0)
         }
+        
         return super.load(request)
     }
     
@@ -165,17 +173,28 @@ extension WKCookieWebView: WKNavigationDelegate {
     
     // MARK: - WKNavigationDelegate
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
-        if let handler = onDecidePolicyForNavigationAction {
-            handler(webView, navigationAction, decisionHandler)
-        } else {
-            decisionHandler(.allow)
+        guard (wkNavigationDelegate?.webView?(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)) == nil else {
+            return
+        }
+        
+        decisionHandler(.allow)
+    }
+    
+    @available(iOS 13.0, *)
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
+        guard (wkNavigationDelegate?.webView?(webView, decidePolicyFor: navigationAction, preferences: preferences, decisionHandler: decisionHandler)) == nil else {
+            return
+        }
+        
+        self.webView(webView, decidePolicyFor: navigationAction) { (policy) in
+            decisionHandler(policy, preferences)
         }
     }
 
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Swift.Void) {
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) ->
+        Swift.Void) {
         defer {
-            if let handler = onDecidePolicyForNavigationResponse {
-                handler(webView, navigationResponse, decisionHandler)
+            if (wkNavigationDelegate?.webView?(webView, decidePolicyFor: navigationResponse, decisionHandler: decisionHandler)) != nil {
             } else {
                 decisionHandler(.allow)
             }
@@ -216,23 +235,23 @@ extension WKCookieWebView: WKNavigationDelegate {
     }
     
     public func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
-        if let handler = onDidReceiveChallenge {
-            handler(webView, challenge, completionHandler)
-        } else {
-            var disposition: URLSession.AuthChallengeDisposition = .performDefaultHandling
-            var credential: URLCredential?
-            
-            if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-                if let serverTrust = challenge.protectionSpace.serverTrust {
-                    credential = URLCredential(trust: serverTrust)
-                    disposition = .useCredential
-                }
-            } else {
-                disposition = .cancelAuthenticationChallenge
-            }
-            
-            completionHandler(disposition, credential)
+        guard (wkNavigationDelegate?.webView?(webView, didReceive: challenge, completionHandler: completionHandler)) == nil else {
+            return
         }
+        
+        var disposition: URLSession.AuthChallengeDisposition = .performDefaultHandling
+        var credential: URLCredential?
+        
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            if let serverTrust = challenge.protectionSpace.serverTrust {
+                credential = URLCredential(trust: serverTrust)
+                disposition = .useCredential
+            }
+        } else {
+            disposition = .cancelAuthenticationChallenge
+        }
+        
+        completionHandler(disposition, credential)
     }
     
     @available(iOS 9.0, *)
