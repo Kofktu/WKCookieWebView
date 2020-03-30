@@ -261,7 +261,7 @@ extension HTTPCookie {
 private extension HTTPCookie {
         
     var javaScriptString: String {
-        if let values = (properties?
+        if let values = (self.properties?
             .map { "\($0.key.rawValue)=\($0.value)" }
             .joined(separator: "; ")) {
             return values
