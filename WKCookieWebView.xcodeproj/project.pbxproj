@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C337D67C1EFE2CFF00425943 /* WKCookieWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = C337D67A1EFE2CFF00425943 /* WKCookieWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C369A63F1EFE46ED008CB0BE /* WKCookieWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C369A63E1EFE46E8008CB0BE /* WKCookieWebView.swift */; };
+		CEE7871323CECF9B007591F1 /* WKCookieWebViewPreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7871223CECF9A007591F1 /* WKCookieWebViewPreloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		C337D67A1EFE2CFF00425943 /* WKCookieWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKCookieWebView.h; sourceTree = "<group>"; };
 		C337D67B1EFE2CFF00425943 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C369A63E1EFE46E8008CB0BE /* WKCookieWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKCookieWebView.swift; sourceTree = "<group>"; };
+		CEE7871223CECF9A007591F1 /* WKCookieWebViewPreloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKCookieWebViewPreloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,7 @@
 			children = (
 				C337D67A1EFE2CFF00425943 /* WKCookieWebView.h */,
 				C369A63E1EFE46E8008CB0BE /* WKCookieWebView.swift */,
+				CEE7871223CECF9A007591F1 /* WKCookieWebViewPreloader.swift */,
 				C337D67B1EFE2CFF00425943 /* Info.plist */,
 			);
 			path = WKCookieWebView;
@@ -108,6 +111,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = C337D66D1EFE2CFF00425943;
@@ -135,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE7871323CECF9B007591F1 /* WKCookieWebViewPreloader.swift in Sources */,
 				C369A63F1EFE46ED008CB0BE /* WKCookieWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +263,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kofktu.WKCookieWebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -279,6 +285,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kofktu.WKCookieWebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

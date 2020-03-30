@@ -28,29 +28,6 @@ github "Kofktu/WKCookieWebView"
 
 ## Usage
 
-#### navigationDelegate -> wkNavigationDelegate
-
-- You should use ```wkNavigationDelegate``` instead of ```navigationDelegate```.
-- However, the three methods of WKNavigationDelegate must use closure instead of delegate.
-
-
-
-```swift
-// @available(iOS 8.0, *)
-// optional public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void)
-public var onDecidePolicyForNavigationAction: ((WKWebView, WKNavigationAction, @escaping (WKNavigationActionPolicy) -> Swift.Void) -> Void)?
-
-// @available(iOS 8.0, *)
-// optional public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Swift.Void)
-public var onDecidePolicyForNavigationResponse: ((WKWebView, WKNavigationResponse, @escaping (WKNavigationResponsePolicy) -> Swift.Void) -> Void)?
-
-// @available(iOS 8.0, *)
-// optional public func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void)
-public var onDidReceiveChallenge: ((WKWebView, URLAuthenticationChallenge, @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) -> Void)?
-```
-
-
-
 #### When HTTPCookieStorage is updated
 
 ```swift
