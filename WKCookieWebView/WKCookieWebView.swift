@@ -96,10 +96,7 @@ open class WKCookieWebView: WKWebView {
         configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] (cookies) in
             cookies
                 .filter { host.range(of: $0.domain) != nil || $0.domain.range(of: host) != nil }
-                .forEach {
-                    print($0)
-                    HTTPCookieStorage.shared.setCookie($0)
-            }
+                .forEach { HTTPCookieStorage.shared.setCookie($0) }
             
             self.flatMap { $0.onUpdateCookieStorage?($0) }
         }
