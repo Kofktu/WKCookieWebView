@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import WebKit
 
-fileprivate class WKCookieProcessPool: WKProcessPool {
+fileprivate final class WKCookieProcessPool: WKProcessPool {
     static let pool = WKCookieProcessPool()
 }
 
@@ -36,7 +36,6 @@ open class WKCookieWebView: WKWebView {
         configuration.processPool = WKCookieProcessPool.pool
         configurationBlock?(configuration)
         super.init(frame: frame, configuration: configuration)
-        configuration.userContentController = userContentWithCookies()
         navigationDelegate = self
     }
     
@@ -44,11 +43,18 @@ open class WKCookieWebView: WKWebView {
         fatalError("init(coder:) has not been implemented, init(frame:configurationBlock:)")
     }
     
+    open override func load(_ request: URLRequest) -> WKNavigation? {
+        request.url.flatMap {
+            configuration.userContentController = userContentWithCookies($0)
+        }
+        return super.load(request)
+    }
+    
     // MARK: - Private
-    private func userContentWithCookies() -> WKUserContentController {
+    private func userContentWithCookies(_ url: URL) -> WKUserContentController {
         let userContentController = configuration.userContentController
         
-        if let cookies = HTTPCookieStorage.shared.cookies, cookies.count > 0 {
+        if let cookies = HTTPCookieStorage.shared.cookies(for: url), cookies.count > 0 {
             
             // https://stackoverflow.com/a/32845148
             var scripts: [String] = ["var cookieNames = document.cookie.split('; ').map(function(cookie) { return cookie.split('=')[0] } )"]
@@ -73,86 +79,29 @@ open class WKCookieWebView: WKWebView {
         return userContentController
     }
 
-    private func update(webView: WKWebView) {
+    private func updateHigherOS11(webView: WKWebView) {
         // WKWebView -> HTTPCookieStorage
-        webView.evaluateJavaScript("document.cookie;") { [weak self] (result, error) in
-            guard let host = self?.url?.host,
-                let documentCookie = result as? String else {
-                    return
-            }
-            
-            self?.fetchCookies(fileter: host, completion: { [weak self] (cookies) in
-                self?.update(with: cookies, documentCookie: documentCookie, host: host)
-            })
-        }
-    }
-    
-    private func update(with cachedCookies: [HTTPCookie]?, documentCookie: String, host: String) {
-        let cookieValues = documentCookie.components(separatedBy: "; ")
-        
-        guard cookieValues.isEmpty == false else {
+        guard #available(iOS 11.0, *) else {
             return
         }
-        
-        let dispatchGroup = DispatchGroup()
-        
-        for value in cookieValues {
-            var comps = value.components(separatedBy: "=")
-            if comps.count < 2 { continue }
-            
-            let cookieName = comps.removeFirst()
-            let cookieValue = comps.joined(separator: "=")
-            let localCookie = cachedCookies?.filter { $0.name == cookieName }.first
-            
-            if let localCookie = localCookie {
-                if !cookieValue.isEmpty && localCookie.value != cookieValue {
-                    // set/update cookie
-                    var properties: [HTTPCookiePropertyKey: Any] = localCookie.properties ?? [
-                        .name: localCookie.name,
-                        .domain: localCookie.domain,
-                        .path: localCookie.path
-                    ]
-                    
-                    properties[.value] = cookieValue
-                    
-                    self.delete(cookie: localCookie)
-                    
-                    if let cookie = HTTPCookie(properties: properties) {
-                        // set cookie
-                        dispatchGroup.enter()
-                        self.set(cookie: cookie) {
-                            dispatchGroup.leave()
-                        }
-                    }
-                }
-            } else {
-                if !cookieName.isEmpty && !cookieValue.isEmpty {
-                    let properties: [HTTPCookiePropertyKey: Any] = [
-                        .name: cookieName,
-                        .value: cookieValue,
-                        .domain: host,
-                        .path: "/"
-                    ]
-                    
-                    if let cookie = HTTPCookie(properties: properties) {
-                        // set cookie
-                        dispatchGroup.enter()
-                        self.set(cookie: cookie) {
-                            dispatchGroup.leave()
-                        }
-                    }
-                }
-            }
+
+        guard let url = url, let host = url.host else {
+            return
+        }
+
+        HTTPCookieStorage.shared.cookies(for: url)?.forEach {
+            HTTPCookieStorage.shared.deleteCookie($0)
         }
         
-        dispatchGroup.notify(queue: .main) { [weak self] in
-            self?.updateWKCookieToHTTPCookieStorage(cachedCookies)
-            
-            guard let self = self else {
-                return
+        configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] (cookies) in
+            cookies
+                .filter { host.range(of: $0.domain) != nil || $0.domain.range(of: host) != nil }
+                .forEach {
+                    print($0)
+                    HTTPCookieStorage.shared.setCookie($0)
             }
             
-            self.onUpdateCookieStorage?(self)
+            self.flatMap { $0.onUpdateCookieStorage?($0) }
         }
     }
     
@@ -182,48 +131,24 @@ open class WKCookieWebView: WKWebView {
         }
     }
     
-    private func updateWKCookieToHTTPCookieStorage(_ wkCookies: [HTTPCookie]?) {
-        guard let cookies = HTTPCookieStorage.shared.cookies, #available(iOS 11.0, *) else {
-            return
-        }
-        
-        wkCookies?
-            .filter { cookies.contains($0) == false }
-            .forEach {
-                HTTPCookieStorage.shared.setCookie($0)
-        }
-    }
-    
 }
 
 extension WKCookieWebView {
     
     typealias HTTPCookieHandler = ([HTTPCookie]?) -> Void
     
-    func fetchCookies(completion: @escaping HTTPCookieHandler) {
-        if #available(iOS 11.0, *) {
-            configuration.websiteDataStore.httpCookieStore.getAllCookies { (cookies) in
-                completion(cookies)
-            }
-        } else {
-            completion(HTTPCookieStorage.shared.cookies)
-        }
-    }
-    
-    func fetchCookies(fileter host: String, completion: @escaping HTTPCookieHandler) {
-        fetchCookies { (cookies) in
-            completion(cookies?.filter { host.range(of: $0.domain) != nil || $0.domain.range(of: host) != nil })
-        }
-    }
-    
     func set(cookie: HTTPCookie, completion: (() -> Void)? = nil) {
-        HTTPCookieStorage.shared.setCookie(cookie)
+        set(httpCookieStorage: cookie)
         
         if #available(iOS 11.0, *) {
             configuration.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: completion)
         } else {
             completion?()
         }
+    }
+    
+    func set(httpCookieStorage cookie: HTTPCookie) {
+        HTTPCookieStorage.shared.setCookie(cookie)
     }
     
     func delete(cookie: HTTPCookie, completion: (() -> Void)? = nil) {
@@ -281,7 +206,7 @@ extension WKCookieWebView: WKNavigationDelegate {
     }
     
     public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        update(webView: webView)
+        updateHigherOS11(webView: webView)
         wkNavigationDelegate?.webView?(webView, didCommit: navigation)
     }
     
@@ -339,6 +264,12 @@ extension HTTPCookie {
 private extension HTTPCookie {
         
     var javaScriptString: String {
+        if let values = (properties?
+            .map { "\($0.key.rawValue)=\($0.value)" }
+            .joined(separator: "; ")) {
+            return values
+        }
+        
         var properties = [
             "\(name)=\(value)",
             "domain=\(domain)",
