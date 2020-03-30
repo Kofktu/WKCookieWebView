@@ -74,13 +74,15 @@ class ViewController: UIViewController {
     }
     
     @objc private func printCookie() {
+        guard let url = webView.url else {
+            return
+        }
+        
         print("=====================Cookies=====================")
-        HTTPCookieStorage.shared.cookies?.forEach {
+        HTTPCookieStorage.shared.cookies(for: url)?.forEach {
             print($0)
         }
         print("=================================================")
-        
-//        perform(#selector(printCookie), with: nil, afterDelay: 1.0)
     }
 }
 
