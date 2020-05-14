@@ -277,27 +277,36 @@ extension HTTPCookie {
 private extension HTTPCookie {
         
     var javaScriptString: String {
-        if let values = (self.properties?
-            .map { "\($0.key.rawValue)=\($0.value)" }
-            .joined(separator: "; ")) {
-            return values
+        if let properties = properties {
+            return properties.reduce(into: [:]) { result, property in
+                switch property.key {
+                case .name:
+                    result[name] = value
+                case .value:
+                    break
+                default:
+                    result[property.key.rawValue] = property.value
+                }
+            }
+            .map { "\($0.0)=\($0.1)" }
+            .joined(separator: "; ")
         }
         
-        var properties = [
+        var script = [
             "\(name)=\(value)",
             "domain=\(domain)",
             "path=\(path)"
         ]
         
         if isSecure {
-            properties.append("secure=true")
+            script.append("secure=true")
         }
         
         if let expiresDate = expiresDate {
-            properties.append("expires=\(HTTPCookie.dateFormatter.string(from: expiresDate))")
+            script.append("expires=\(HTTPCookie.dateFormatter.string(from: expiresDate))")
         }
         
-        return properties.joined(separator: "; ")
+        return script.joined(separator: "; ")
     }
     
     private static let dateFormatter: DateFormatter = {
