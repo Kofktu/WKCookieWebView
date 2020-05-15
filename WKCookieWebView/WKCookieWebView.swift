@@ -33,8 +33,6 @@ open class WKCookieWebView: WKWebView {
     // The closure where cookie information is called at update time
     @objc public var onUpdateCookieStorage: ((WKCookieWebView) -> Void)?
     
-    private var updatedCookies = [String]()
-    
     @objc
     public init(frame: CGRect, configurationBlock: ((WKWebViewConfiguration) -> Void)? = nil) {
         HTTPCookieStorage.shared.cookieAcceptPolicy = .always
@@ -97,14 +95,17 @@ open class WKCookieWebView: WKWebView {
             return
         }
 
-        HTTPCookieStorage.shared.cookies(for: url)?.forEach {
-            HTTPCookieStorage.shared.deleteCookie($0)
-        }
+        let httpCookies = HTTPCookieStorage.shared.cookies(for: url)
         
         configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] (cookies) in
-            cookies
-                .filter { host.range(of: $0.domain) != nil || $0.domain.range(of: host) != nil }
-                .forEach { HTTPCookieStorage.shared.setCookie($0) }
+            let wkCookies = cookies.filter { host.range(of: $0.domain) != nil || $0.domain.range(of: host) != nil }
+            for wkCookie in wkCookies {
+                httpCookies?
+                    .filter { $0.name == wkCookie.name }
+                    .forEach { HTTPCookieStorage.shared.deleteCookie($0) }
+                
+                HTTPCookieStorage.shared.setCookie(wkCookie)
+            }
             
             self.flatMap { $0.onUpdateCookieStorage?($0) }
         }
@@ -117,10 +118,6 @@ open class WKCookieWebView: WKWebView {
         
         let dispatchGroup = DispatchGroup()
         cookies.forEach {
-            if !updatedCookies.contains($0.name) {
-                updatedCookies.append($0.name)
-            }
-            
             dispatchGroup.enter()
             set(cookie: $0) {
                 dispatchGroup.leave()
@@ -280,27 +277,30 @@ extension HTTPCookie {
 private extension HTTPCookie {
         
     var javaScriptString: String {
-        if let values = (self.properties?
-            .map { "\($0.key.rawValue)=\($0.value)" }
-            .joined(separator: "; ")) {
-            return values
+        if var properties = properties {
+            properties.removeValue(forKey: .name)
+            properties.removeValue(forKey: .value)
+                
+            return properties.reduce(into: ["\(name)=\(value)"]) { result, property in
+                result.append("\(property.key.rawValue)=\(property.value)")
+            }.joined(separator: "; ")
         }
         
-        var properties = [
+        var script = [
             "\(name)=\(value)",
             "domain=\(domain)",
             "path=\(path)"
         ]
         
         if isSecure {
-            properties.append("secure=true")
+            script.append("secure=true")
         }
         
         if let expiresDate = expiresDate {
-            properties.append("expires=\(HTTPCookie.dateFormatter.string(from: expiresDate))")
+            script.append("expires=\(HTTPCookie.dateFormatter.string(from: expiresDate))")
         }
         
-        return properties.joined(separator: "; ")
+        return script.joined(separator: "; ")
     }
     
     private static let dateFormatter: DateFormatter = {
