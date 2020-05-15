@@ -26,6 +26,14 @@ class ViewController: UIViewController {
         let urlString = "http://github.com"
         let isNeedPreloadForCookieSync = false
         
+        let cookie = HTTPCookie(properties: [
+            .domain: "github.com",
+            .path: "/",
+            .name: "[Test] Cookie",
+            .value: "value!!"])!
+        
+        HTTPCookieStorage.shared.setCookie(cookie)
+        
         if isNeedPreloadForCookieSync {
             // After running the app, before the first webview was loaded,
             // Cookies may not be set properly,
