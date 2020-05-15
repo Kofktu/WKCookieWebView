@@ -277,19 +277,13 @@ extension HTTPCookie {
 private extension HTTPCookie {
         
     var javaScriptString: String {
-        if let properties = properties {
-            return properties.reduce(into: [:]) { result, property in
-                switch property.key {
-                case .name:
-                    result[name] = value
-                case .value:
-                    break
-                default:
-                    result[property.key.rawValue] = property.value
-                }
-            }
-            .map { "\($0.0)=\($0.1)" }
-            .joined(separator: "; ")
+        if var properties = properties {
+            properties.removeValue(forKey: .name)
+            properties.removeValue(forKey: .value)
+                
+            return properties.reduce(into: ["\(name)=\(value)"]) { result, property in
+                result.append("\(property.key.rawValue)=\(property.value)")
+            }.joined(separator: "; ")
         }
         
         var script = [
