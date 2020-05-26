@@ -33,7 +33,7 @@ open class WKCookieWebView: WKWebView {
     // The closure where cookie information is called at update time
     @objc public var onUpdateCookieStorage: ((WKCookieWebView) -> Void)?
     
-    @objc public var recordedCookies: [HTTPCookie] = [];
+    @objc public var recordedCookies: [HTTPCookie] = []
     
     @objc
     public init(frame: CGRect, configurationBlock: ((WKWebViewConfiguration) -> Void)? = nil) {
@@ -56,10 +56,6 @@ open class WKCookieWebView: WKWebView {
         }
         
         return super.load(request)
-    }
-    
-    @objc public func deleteRecordedCookie(_ cookie: HTTPCookie) {
-        recordedCookies.removeAll(where: { $0.name == cookie.name })
     }
     
     // MARK: - Private
