@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "WKCookieWebView", targets: ["WKCookieWebView"])
     ],
     targets: [
-        .target(name: "WKCookieWebView", dependencies: [])
+        .target(name: "WKCookieWebView", dependencies: [], path: "WKCookieWebView")
     ],
     swiftLanguageVersions: [.v5]
 )
