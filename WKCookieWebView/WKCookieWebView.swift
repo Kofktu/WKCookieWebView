@@ -33,6 +33,8 @@ open class WKCookieWebView: WKWebView {
     // The closure where cookie information is called at update time
     @objc public var onUpdateCookieStorage: ((WKCookieWebView) -> Void)?
     
+    @objc public var recordedCookies: [HTTPCookie] = []
+    
     @objc
     public init(frame: CGRect, configurationBlock: ((WKWebViewConfiguration) -> Void)? = nil) {
         HTTPCookieStorage.shared.cookieAcceptPolicy = .always
@@ -61,6 +63,7 @@ open class WKCookieWebView: WKWebView {
         let userContentController = configuration.userContentController
         
         if let cookies = HTTPCookieStorage.shared.cookies(for: url), cookies.count > 0 {
+            self.recordedCookies.updateOrAppendAll(cookies)
             
             // https://stackoverflow.com/a/32845148
             var scripts: [String] = ["var cookieNames = document.cookie.split('; ').map(function(cookie) { return cookie.split('=')[0] } )"]
@@ -95,13 +98,16 @@ open class WKCookieWebView: WKWebView {
             return
         }
 
-        let httpCookies = HTTPCookieStorage.shared.cookies(for: url)
+        let httpCookies = HTTPCookieStorage.shared.cookies(for: url) ?? []
         
         configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] (cookies) in
             let wkCookies = cookies.filter { host.range(of: $0.domain) != nil || $0.domain.range(of: host) != nil }
+            
+            self?.recordedCookies.updateOrAppendAll(wkCookies)
+            self?.recordedCookies.updateOrAppendAll(httpCookies)
+            
             for wkCookie in wkCookies {
-                httpCookies?
-                    .filter { $0.name == wkCookie.name }
+                httpCookies.filter { $0.name == wkCookie.name }
                     .forEach { HTTPCookieStorage.shared.deleteCookie($0) }
                 
                 HTTPCookieStorage.shared.setCookie(wkCookie)
@@ -117,19 +123,36 @@ open class WKCookieWebView: WKWebView {
         }
         
         let dispatchGroup = DispatchGroup()
-        cookies.forEach {
+        cookies.forEach { cookie in
             dispatchGroup.enter()
-            set(cookie: $0) {
+            set(cookie: cookie) {
                 dispatchGroup.leave()
             }
         }
         
+        self.recordedCookies.updateOrAppendAll(cookies)
+
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let self = self else {
                 return
             }
             
             self.onUpdateCookieStorage?(self)
+        }
+    }
+    
+    private func evaluateDocumentCookies(webView: WKWebView) {
+        guard let url = webView.url else {
+            return
+        }
+        
+        webView.evaluateJavaScript("document.cookie") { result, error in
+            guard let resultString = result as! String? else {
+                return
+            }
+            
+            let cookies = resultString.toCookies(urlString: url.absoluteString)
+            self.recordedCookies.updateOrAppendAll(cookies)
         }
     }
     
@@ -204,6 +227,7 @@ extension WKCookieWebView: WKNavigationDelegate {
         }
         
         update(cookies: HTTPCookie.cookies(withResponseHeaderFields: allHeaderFields, for: url))
+        evaluateDocumentCookies(webView: webView)
     }
     
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
@@ -270,6 +294,53 @@ extension HTTPCookie {
                value == other.value &&
                domain == other.domain &&
                path == other.path
+    }
+    
+}
+
+extension Array where Element: HTTPCookie {
+    
+    mutating func updateOrAppend(_ element: Element) {
+        if let elementIndex = self.firstIndex(where: { $0.name == element.name }) {
+            remove(at: elementIndex)
+        }
+        append(element)
+    }
+    
+    mutating func updateOrAppendAll(_ elements: [Element]) {
+        elements.forEach { element in
+            updateOrAppend(element)
+        }
+    }
+    
+}
+
+extension String {
+    
+    func toCookies(urlString: String) -> [HTTPCookie] {
+        var cookies = [HTTPCookie]()
+        let cookieStrings = self.split(separator: ";")
+        cookieStrings.forEach { cookieString in
+            // Expected format: key=value
+            let keyAndValue = cookieString.split(separator: "=")
+            if keyAndValue.count == 2 {
+                let key = String(keyAndValue[0]).replacingOccurrences(of: " ", with: "")
+                let value = String(keyAndValue[1])
+                
+                // Create dummy properties except for .name and .domain
+                let properties: [HTTPCookiePropertyKey: Any]
+                    = [.domain: urlString,
+                       .name : key,
+                       .value: value,
+                       .path: "/",
+                       .secure: true,
+                       .expires: Date()]
+                if let cookie = HTTPCookie(properties: properties) {
+                    cookies.append(cookie)
+                }
+            }
+        }
+        return cookies
     }
     
 }
