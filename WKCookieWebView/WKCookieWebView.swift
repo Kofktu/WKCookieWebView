@@ -49,23 +49,30 @@ open class WKCookieWebView: WKWebView {
     
     @discardableResult
     open override func load(_ request: URLRequest) -> WKNavigation? {
-        request.url.flatMap {
-            configuration.userContentController = userContentWithCookies($0)
+        if let url = request.url,
+            let cookies = HTTPCookieStorage.shared.cookies(for: url) {
+            
+            if #available(iOS 11.0, *) {
+                cookies.forEach {
+                    configuration.websiteDataStore.httpCookieStore.setCookie($0)
+                }
+            } else {
+                configuration.userContentController = userContent(with: cookies)
+            }
         }
         
         return super.load(request)
     }
     
     // MARK: - Private
-    private func userContentWithCookies(_ url: URL) -> WKUserContentController {
+    private func userContent(with cookies: [HTTPCookie]) -> WKUserContentController {
         let userContentController = configuration.userContentController
         
-        if let cookies = HTTPCookieStorage.shared.cookies(for: url), cookies.count > 0 {
-            
+        if cookies.isEmpty == false {
             // https://stackoverflow.com/a/32845148
             var scripts: [String] = ["var cookieNames = document.cookie.split('; ').map(function(cookie) { return cookie.split('=')[0] } )"]
             let now = Date()
-
+            
             for cookie in cookies {
                 if let expiresDate = cookie.expiresDate, now.compare(expiresDate) == .orderedDescending {
                     // Expire
