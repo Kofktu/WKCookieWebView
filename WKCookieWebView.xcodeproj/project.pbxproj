@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C337D67C1EFE2CFF00425943 /* WKCookieWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = C337D67A1EFE2CFF00425943 /* WKCookieWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C369A63F1EFE46ED008CB0BE /* WKCookieWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C369A63E1EFE46E8008CB0BE /* WKCookieWebView.swift */; };
+		C3ECD519250E0EF9003016C1 /* CookieWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ECD518250E0EF9003016C1 /* CookieWebView.swift */; };
 		CEE7871323CECF9B007591F1 /* WKCookieWebViewPreloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7871223CECF9A007591F1 /* WKCookieWebViewPreloader.swift */; };
 /* End PBXBuildFile section */
 
@@ -17,6 +18,7 @@
 		C337D67A1EFE2CFF00425943 /* WKCookieWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKCookieWebView.h; sourceTree = "<group>"; };
 		C337D67B1EFE2CFF00425943 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C369A63E1EFE46E8008CB0BE /* WKCookieWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKCookieWebView.swift; sourceTree = "<group>"; };
+		C3ECD518250E0EF9003016C1 /* CookieWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieWebView.swift; sourceTree = "<group>"; };
 		CEE7871223CECF9A007591F1 /* WKCookieWebViewPreloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKCookieWebViewPreloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,12 +52,21 @@
 		C337D6791EFE2CFF00425943 /* WKCookieWebView */ = {
 			isa = PBXGroup;
 			children = (
+				C3ECD517250E0EEE003016C1 /* SwiftUI */,
 				C337D67A1EFE2CFF00425943 /* WKCookieWebView.h */,
 				C369A63E1EFE46E8008CB0BE /* WKCookieWebView.swift */,
 				CEE7871223CECF9A007591F1 /* WKCookieWebViewPreloader.swift */,
 				C337D67B1EFE2CFF00425943 /* Info.plist */,
 			);
 			path = WKCookieWebView;
+			sourceTree = "<group>";
+		};
+		C3ECD517250E0EEE003016C1 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				C3ECD518250E0EF9003016C1 /* CookieWebView.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +152,7 @@
 			files = (
 				CEE7871323CECF9B007591F1 /* WKCookieWebViewPreloader.swift in Sources */,
 				C369A63F1EFE46ED008CB0BE /* WKCookieWebView.swift in Sources */,
+				C3ECD519250E0EF9003016C1 /* CookieWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
