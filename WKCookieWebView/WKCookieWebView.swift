@@ -97,17 +97,20 @@ open class WKCookieWebView: WKWebView {
 
         let httpCookies = HTTPCookieStorage.shared.cookies(for: url)
         
-        configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] (cookies) in
-            let wkCookies = cookies.filter { host.range(of: $0.domain) != nil || $0.domain.range(of: host) != nil }
-            for wkCookie in wkCookies {
-                httpCookies?
-                    .filter { $0.name == wkCookie.name }
-                    .forEach { HTTPCookieStorage.shared.deleteCookie($0) }
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {return}
+            self.configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] (cookies) in
+                let wkCookies = cookies.filter { host.range(of: $0.domain) != nil || $0.domain.range(of: host) != nil }
+                for wkCookie in wkCookies {
+                    httpCookies?
+                        .filter { $0.name == wkCookie.name }
+                        .forEach { HTTPCookieStorage.shared.deleteCookie($0) }
+                    
+                    HTTPCookieStorage.shared.setCookie(wkCookie)
+                }
                 
-                HTTPCookieStorage.shared.setCookie(wkCookie)
+                self.flatMap { $0.onUpdateCookieStorage?($0) }
             }
-            
-            self.flatMap { $0.onUpdateCookieStorage?($0) }
         }
     }
     
@@ -143,7 +146,10 @@ extension WKCookieWebView {
         set(httpCookieStorage: cookie)
         
         if #available(iOS 11.0, *) {
-            configuration.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: completion)
+            DispatchQueue.main.async { [weak self] in
+                guard let self else {return}
+                    self.configuration.websiteDataStore.httpCookieStore.setCookie(cookie, completionHandler: completion)
+            }
         } else {
             completion?()
         }
@@ -157,7 +163,10 @@ extension WKCookieWebView {
         HTTPCookieStorage.shared.deleteCookie(cookie)
         
         if #available(iOS 11.0, *) {
-            configuration.websiteDataStore.httpCookieStore.delete(cookie, completionHandler: completion)
+            DispatchQueue.main.async { [weak self] in
+                guard let self else {return}
+                self.configuration.websiteDataStore.httpCookieStore.delete(cookie, completionHandler: completion)
+            }
         } else {
             completion?()
         }
@@ -239,16 +248,19 @@ extension WKCookieWebView: WKNavigationDelegate {
         var disposition: URLSession.AuthChallengeDisposition = .performDefaultHandling
         var credential: URLCredential?
         
-        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-            if let serverTrust = challenge.protectionSpace.serverTrust {
-                credential = URLCredential(trust: serverTrust)
-                disposition = .useCredential
+        DispatchQueue.global(qos: .default).async { [weak webView] in
+            guard webView != nil else {return}
+            if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+                if let serverTrust = challenge.protectionSpace.serverTrust {
+                    credential = URLCredential(trust: serverTrust)
+                    disposition = .useCredential
+                }
+            } else {
+                disposition = .cancelAuthenticationChallenge
             }
-        } else {
-            disposition = .cancelAuthenticationChallenge
+            
+            completionHandler(disposition, credential)
         }
-        
-        completionHandler(disposition, credential)
     }
     
     @available(iOS 9.0, *)
